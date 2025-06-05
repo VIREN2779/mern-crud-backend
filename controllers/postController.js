@@ -23,7 +23,24 @@ const createPost = async (req, res) => {
   }
 };
 
+const getPosts = async (req, res) => {
+  try {
+    const posts = await Post.find({});
+    res.status(200).send({
+      success: true,
+      message: ' Post all Data(postController.js)',
+      data: posts,
+    });
+  } catch (error) {
+    console.log('get catch error(postController.js)', error.message);
+    res.status(400).json({
+      success: false,
+      message: 'get catch error(postController.js)',
+    });
+  }
+};
 
 module.exports = {
-  createPost
+  createPost,
+  getPosts
 };
