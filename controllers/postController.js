@@ -40,7 +40,27 @@ const getPosts = async (req, res) => {
   }
 };
 
+const deletePost = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Post.deleteOne({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: 'delete data successfully(postController.js)',
+    });
+  } catch (error) {
+    console.log('delete catch error(postController.js)', error.message);
+    res.status(400).json({
+      success: false,
+      message: 'delete catch error(postController.js)',
+    });
+  }
+};
+
+
 module.exports = {
   createPost,
-  getPosts
+  getPosts,
+  deletePost
 };

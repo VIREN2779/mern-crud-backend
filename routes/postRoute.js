@@ -50,3 +50,6 @@ post_route_App.post(
 
 // --------------------------------------------GET all Data------------------------------------------------
 post_route_App.get('/get-posts', postController.getPosts);
+
+// --------------------------------------------DELETE-----------------------------------------------------
+post_route_App.delete('/delete-post/:id', postController.deletePost);
