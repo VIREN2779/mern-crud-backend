@@ -53,3 +53,11 @@ post_route_App.get('/get-posts', postController.getPosts);
 
 // --------------------------------------------DELETE-----------------------------------------------------
 post_route_App.delete('/delete-post/:id', postController.deletePost);
+
+// --------------------------------------------UPDATE-----------------------------------------------------
+post_route_App.post(
+  '/update-post',
+  upload.single('image'),
+  postController.updatePost
+);
+module.exports = post_route_App;

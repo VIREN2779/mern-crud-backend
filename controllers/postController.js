@@ -58,9 +58,47 @@ const deletePost = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  try {
+    if (req.file !== undefined) {
+      var id = req.body.id;
+      var title = req.body.title;
+      var date = req.body.date;
+      var image = req.file.filename;
 
+      await Post.findByIdAndUpdate(
+        { _id: id },
+        { $set: { title: title, date: date, image: image } }
+      );
+      res.status(200).send({
+        success: true,
+        message: 'update data successfully(postController.js)',
+      });
+    } else {
+      var id = req.body.id;
+      var title = req.body.title;
+      var date = req.body.date;
+
+      await Post.findByIdAndUpdate(
+        { _id: id },
+        { $set: { title: title, date: date } }
+      );
+      res.status(200).send({
+        success: true,
+        message: 'update data successfully ELSE(postController.js)',
+      });
+    }
+  } catch (error) {
+    console.log('update catch error(postController.js)', error.message);
+    res.status(400).json({
+      success: false,
+      message: 'update catch error(postController.js)',
+    });
+  }
+};
 module.exports = {
   createPost,
   getPosts,
-  deletePost
+  deletePost,
+  updatePost, 
 };
